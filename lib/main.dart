@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yuktidea_task/presentation/screens/login_screen.dart';
 import 'package:yuktidea_task/presentation/screens/startup_screen.dart';
 
 void main() {
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       debugShowCheckedModeBanner: false,
-      home: const LoginScreen(),
+      home: const StartUpScreen(),
     );
   }
 }

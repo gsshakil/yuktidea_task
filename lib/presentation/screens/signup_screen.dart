@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yuktidea_task/core/constants/colors.dart';
-import 'package:yuktidea_task/presentation/screens/otp_verification_screen.dart';
-import 'package:yuktidea_task/presentation/screens/signup_screen.dart';
 import 'package:yuktidea_task/presentation/widgets/k_large_button.dart';
 import 'package:yuktidea_task/presentation/widgets/k_password_text_field.dart';
 import 'package:yuktidea_task/presentation/widgets/k_text_field.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,48 +27,43 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
         width: MediaQuery.of(context).size.width,
         child: ListView(children: [
-          SizedBox(height: MediaQuery.of(context).size.height * 0.075),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.025),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 60),
             child: _buildHeading(),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-          _buildLoginForm(),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.15),
-          _buildLoginButton(),
+          _buildSignUpForm(),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+          _buildSignUpButton(),
         ]),
       ),
     );
   }
 
-  Column _buildLoginButton() {
+  Column _buildSignUpButton() {
     return Column(
       children: [
         KLargeButton(
-          title: 'Login',
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (_) => const OtpVerificationScreen()));
-          },
+          title: 'Sign Up',
+          onTap: () {},
         ),
         const SizedBox(height: 10),
         InkWell(
           onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => const SignupScreen()));
+            Navigator.of(context).pop();
           },
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Don\'t have an account?',
+                'Already have an account?',
                 style:
                     GoogleFonts.montserrat(color: kWhiteColor.withOpacity(0.5)),
               ),
               const SizedBox(width: 5),
               Text(
-                'Signup',
+                'Login',
                 style: GoogleFonts.montserrat(color: kRedColor),
               ),
             ],
@@ -76,13 +73,23 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Column _buildLoginForm() {
+  Column _buildSignUpForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         KTextField(
+          controller: nameController,
+          hintText: 'Name',
+        ),
+        const SizedBox(height: 10),
+        KTextField(
           controller: emailController,
-          hintText: 'Email/Phone number',
+          hintText: 'Email',
+        ),
+        const SizedBox(height: 10),
+        KTextField(
+          controller: phoneController,
+          hintText: 'Phone number',
         ),
         const SizedBox(height: 10),
         KPasswordTextField(
@@ -90,13 +97,10 @@ class _LoginScreenState extends State<LoginScreen> {
           hintText: 'Password',
         ),
         const SizedBox(height: 10),
-        InkWell(
-          onTap: () {},
-          child: Text(
-            'Forgot Password?',
-            style: GoogleFonts.montserrat(color: kWhiteColor.withOpacity(0.5)),
-          ),
-        )
+        KPasswordTextField(
+          controller: confirmPasswordController,
+          hintText: 'Confirm Password',
+        ),
       ],
     );
   }
@@ -107,15 +111,15 @@ class _LoginScreenState extends State<LoginScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          'Welcome Back!',
+          'Create New Account',
           style: GoogleFonts.montserrat(
-            fontSize: 24,
+            fontSize: 28,
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 20),
         Text(
-          'Please sign in to your account',
+          'Fill in the form to continue',
           style: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
         ),
       ],

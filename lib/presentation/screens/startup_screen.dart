@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yuktidea_task/core/constants/colors.dart';
+import 'package:yuktidea_task/presentation/screens/login_screen.dart';
 import 'package:yuktidea_task/presentation/widgets/k_large_button.dart';
 
 class StartUpScreen extends StatelessWidget {
@@ -31,7 +30,7 @@ class StartUpScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.camera_front_outlined),
+                      const Icon(Icons.video_camera_back_rounded),
                       const SizedBox(width: 10),
                       Text(
                         'CINE COMPASS',
@@ -56,9 +55,13 @@ class StartUpScreen extends StatelessWidget {
                       style:
                           GoogleFonts.montserrat(fontWeight: FontWeight.w500),
                     ),
-                    const SizedBox(height: 20),
-                    const KLargeButton(
+                    const SizedBox(height: 40),
+                    KLargeButton(
                       title: 'Get Started',
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => const LoginScreen()));
+                      },
                     ),
                   ],
                 ),

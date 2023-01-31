@@ -6,16 +6,18 @@ class KLargeButton extends StatelessWidget {
   const KLargeButton({
     Key? key,
     required this.title,
+    required this.onTap,
   }) : super(key: key);
 
   final String title;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onTap,
         style: ElevatedButton.styleFrom(
           backgroundColor: kRedColor,
           shape: RoundedRectangleBorder(
